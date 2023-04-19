@@ -7,7 +7,9 @@
     height: 100vh;
     flex-grow: 1;
 }
-
+h1{
+    height: 100px;
+}
 h3 {
     margin: 10px;
 }
@@ -16,14 +18,20 @@ form {
     display: flex;
     flex-direction: column;
     background-color: #62929E;
+    width: 100vw;
+    max-height: 75vh;
     padding: 50px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
 }
 
-label {
-    font-weight: bold;
-}
+.bi-check{
+    font-size: 2rem;
+    color: #04c004;
+    top: 5px;
+    position: relative;
+    
 
+}
 input {
     padding: 10px;
     margin-bottom: 10px;
@@ -34,15 +42,15 @@ input {
 
 input:focus {
     box-shadow: 0 0 0 0;
-    border: 0px;
-    border-bottom: 1px solid black;
-
+    outline: 0;
+    background-color: transparent;
 }
 
 button {
     margin: 10px 0;
     cursor: pointer;
 }
+
 
 #forgot {
     border: none;
@@ -52,6 +60,10 @@ button {
     background-color: transparent;
 }
 
+a{
+    color: white;
+}
+
 footer {
     bottom: 0px;
     margin: 0;
@@ -59,3 +71,35 @@ footer {
     text-align: center;
 }
 
+/*home*/
+
+.body-home {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    flex-grow: 1;
+    
+}
+
+h3 {
+    margin: 10px;
+}
+/* .navbar{
+    width: 100vw;
+    top: 0px;
+} */
+.container-home{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+  
+}
+
+#enter-btn:active{
+}
+
+.disabled{
+    display: none;
+}
