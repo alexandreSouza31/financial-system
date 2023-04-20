@@ -76,10 +76,20 @@ if (body_login) {//curto-circuito
     })
 
 
-   
+    const openEye = document.querySelector(".bi-eye");
+    const closeEye = document.querySelector(".bi-eye-slash");
+
+    openEye.addEventListener("click", () => {
+        closeEye.classList.remove("disabled");
+        password_login.setAttribute("type", "password");
+    })
+    
+    closeEye.addEventListener("click", () => {
+        closeEye.classList.toggle("disabled");
+        password_login.setAttribute("type", "text");
+    })
 
 
 }//fim curto-circuito do login
-
 
 
