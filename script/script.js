@@ -85,15 +85,21 @@ if (body_login) {//curto-circuito
 
     const openEye = document.querySelector(".bi-eye");
     const closeEye = document.querySelector(".bi-eye-slash");
+    openEye.classList.add("disabled");
+    password_login.setAttribute("type", "password");
 
     openEye.addEventListener("click", () => {
-        closeEye.classList.remove("disabled");
         password_login.setAttribute("type", "password");
+        openEye.classList.add("disabled");
+        closeEye.classList.remove("disabled");
+        //password_login.setAttribute("type", "password");
     })
 
     closeEye.addEventListener("click", () => {
-        closeEye.classList.toggle("disabled");
+        //closeEye.classList.toggle("disabled");
         password_login.setAttribute("type", "text");
+        openEye.classList.remove("disabled");
+        closeEye.classList.add("disabled");
     })
 
 

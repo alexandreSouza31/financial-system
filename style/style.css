@@ -100,10 +100,9 @@ h3 {
 #enter-btn:active{
 }
 
-.bi-eye-slash{
-    position: relative;
-    bottom: 24px;
-}
+/* .bi-eye{
+    display: none;
+} */
 
 .disabled{
     display: none;
