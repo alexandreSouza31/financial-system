@@ -73,14 +73,36 @@ if (body_login) {//curto-circuito
             }, 2000)
             return;
         } else {
-            alert_success.classList.remove("disabled");
-            alert_success.innerHTML = `Entrando...`;
-            setTimeout(() => {
-                alert_success.classList.add("disabled");
-                window.location.href = "/home.html";
-            }, 2000)
+
+
+            firebase.auth().signInWithEmailAndPassword(email_login.value, password_login.value).//retorna uma promisse
+                //uma promisse informa que vai retornar, mas não quando,pois é assíncrona.
+                then(response => {//que é a resposta. Então consigo tratá-la.
+                    alert_success.classList.remove("disabled");
+                    alert_success.innerHTML = `Entrando...`;
+
+                    setTimeout(() => {
+                        alert_success.classList.add("disabled");
+                        window.location.href = "/home.html";
+                    }, 2000)
+                }).catch(error => {
+                    alert_danger.innerHTML = `Usuário não encontrado!`;
+                    alert_danger.classList.remove("disabled");
+
+                    setTimeout(() => {
+                        alert_danger.classList.add("disabled");
+                    }, 2000)
+                });
+
+            // setTimeout(() => {
+            //     alert_success.classList.add("disabled");
+            //     window.location.href = "/home.html";
+            // }, 2000)
         }
     })
+
+
+
 
 
     const openEye = document.querySelector(".bi-eye");
@@ -194,7 +216,6 @@ if (body_register) {//início curto-circuito register
         if (!valid_name || !valid_email || !valid_password || !valid_confirm) {
             return false;
         } else if (name_register.value === "" && email_register.value === "" && password_register.value === "" && confirm_register.value === "") {
-            console.log("deu ruim2")
             return false;
         } else {
 
