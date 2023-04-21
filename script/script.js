@@ -7,6 +7,7 @@ let alert_success = document.querySelector(".alert-success");
 
 
 if (body_login) {//curto-circuito
+
     const email_login = document.querySelector(".email-login");
     let label_email_login = document.querySelector(".label-email-login");
     valid_email = false;
@@ -83,7 +84,7 @@ if (body_login) {//curto-circuito
         closeEye.classList.remove("disabled");
         password_login.setAttribute("type", "password");
     })
-    
+
     closeEye.addEventListener("click", () => {
         closeEye.classList.toggle("disabled");
         password_login.setAttribute("type", "text");
@@ -93,3 +94,127 @@ if (body_login) {//curto-circuito
 }//fim curto-circuito do login
 
 
+if (body_register) {//início curto-circuito register
+    let label_name_register = document.querySelector(".label-name-register");
+    let label_email_register = document.querySelector(".label-email-register");
+    let label_password_register = document.querySelector(".label-password-register");
+    let label_confirm_register = document.querySelector(".label-confirm-register");
+
+    alert_danger.classList.add("disabled");
+    alert_success.classList.add("disabled");
+
+    const name_register = document.querySelector(".name-register");
+    let valid_name = false;
+    const email_register = document.querySelector(".email-register");
+    let valid_email = false;
+    const password_register = document.querySelector(".password-register");
+    let valid_password = false;
+    const confirm_register = document.querySelector(".confirm-register");
+    let valid_confirm = false;
+
+    const register_btn = document.querySelector("#register-btn");
+
+
+    name_register.addEventListener("keyup", () => {
+        if (name_register.value.length < 3) {
+
+            name_register.setAttribute("style", "border-color:red");
+            label_name_register.setAttribute("style", "color:red");
+            label_name_register.innerHTML = `Nome: mínimo 3 caracteres`;
+            valid_name = false;
+        } else {
+            label_name_register.setAttribute("style", "color:black");
+            label_name_register.innerHTML = `Nome: <i class="bi bi-check"></i>`;
+            name_register.setAttribute("style", "border-color:#04c004;");
+            valid_name = true;
+        }
+    })
+
+    email_register.addEventListener("keyup", function () {
+        const standard_email = /^[\w._-]+@[\w_.-]+\.[\w]+[\w]+[\w]/;
+        let text = this.value;
+        if (!standard_email.test(text)) {
+
+            email_register.setAttribute("style", "border-color:red");
+            label_email_register.setAttribute("style", "color:red");
+            label_email_register.innerHTML = `Email: insira um email válido`;
+            valid_email = false;
+        } else {
+            email_register.setAttribute("style", "border-color:#04c004;");
+            label_email_register.setAttribute("style", "color:black");
+            label_email_register.innerHTML = `Email: <i class="bi bi-check"></i>`;
+            valid_email = true;
+        }
+    })
+
+    password_register.addEventListener("keyup", () => {
+        if (password_register.value.length < 6) {
+
+            password_register.setAttribute("style", "border-color:red");
+            label_password_register.setAttribute("style", "color:red");
+            label_password_register.innerHTML = `Senha: mínimo 6 caracteres`;
+            valid_password = false;
+        } else {
+            password_register.setAttribute("style", "border-color:#04c004;");
+            label_password_register.setAttribute("style", "color:black");
+            label_password_register.innerHTML = `Senha: <i class="bi bi-check"></i>`;
+            valid_password = true;
+        }
+    })
+
+    confirm_register.addEventListener("keyup", () => {
+        if (password_register.value !== confirm_register.value) {
+
+            confirm_register.setAttribute("style", "border-color:red");
+            label_confirm_register.setAttribute("style", "color:red");
+            label_confirm_register.innerHTML = `Confirme: as senhas não conferem`;
+            valid_confirm = false;
+        } else {
+            confirm_register.setAttribute("style", "border-color:#04c004;");
+            label_confirm_register.setAttribute("style", "color:black");
+            label_confirm_register.innerHTML = `Confirme sua senha: <i class="bi bi-check"></i>`;
+            valid_confirm = true;
+        }
+    })
+
+
+    function validateRegister() {
+        if (!valid_name || !valid_email || !valid_password || !valid_confirm) {
+            return false;
+        } else if (name_register.value === "" && email_register.value === "" && password_register.value === "" && confirm_register.value === "") {
+            console.log("deu ruim2")
+            return false;
+        } else {
+
+            return true
+        }
+    }
+
+
+    register_btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (validateRegister() === false) {
+            alert_danger.classList.remove("disabled");
+            alert_danger.innerHTML = `preencha os dados corretamente!`;
+
+            setTimeout(() => {
+                alert_danger.classList.add("disabled");;
+            }, 2000)
+            return
+        } else {
+            alert_success.classList.remove("disabled");
+            alert_success.innerHTML = `Usuário cadastrado com sucesso!`;
+            setTimeout(() => {
+                name_register.value = ""; email_register.value = ""; password_register.value = ""; confirm_register.value = ""
+                window.location.href = "/index.html";
+            }, 2000)
+        }
+    })
+
+
+
+
+
+
+
+}

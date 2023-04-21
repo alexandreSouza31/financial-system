@@ -10,24 +10,31 @@
             rel="stylesheet"
             integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
             crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
         <!--end bootstrap-->
         <link rel="stylesheet" href="/style/style.css" media="all">
         <link rel="stylesheet" href="/style/media-query.css">
-        <script src="/script/script.js"></script>
+        <script src="/script/script.js" defer></script>
         <title>financial system</title>
     </head>
     <body class="body-register">
         <h1>Minhas Finanças</h1>
         <div class="container-register">
             <h3 class="register-title">Cadastre-se</h3>
+            
+            <div class="alert alert-danger" role="alert">
+            </div>
+            <div class="alert alert-success" role="alert">
+            </div>
+
             <form action="#" class="register-form">
-                <label>nome</label>
+                <label class="label-name-register">nome</label>
                 <input class="name-register" type="text">
-                <label>email</label>
+                <label class="label-email-register">email</label>
                 <input class="email-register" type="email">
-                <label>senha</label>
+                <label class="label-password-register">senha</label>
                 <input class="password-register" type="text">
-                <label>confirme sua senha</label>
+                <label class="label-confirm-register">confirme sua senha</label>
                 <input class="confirm-register" type="text">
                 <button type="button" id="register-btn" class="btn btn-outline-dark">Cadastrar</button>
                 <a href="/index.html">Login</a>
