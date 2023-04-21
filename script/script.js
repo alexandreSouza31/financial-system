@@ -18,6 +18,7 @@ if (body_login) {//curto-circuito
 
 
     const enter_btn = document.querySelector("#enter-btn");
+    const forgot = document.querySelector("#forgot");
 
     email_login.addEventListener("keyup", function () {
         const standard_email = /^[\w._-]+@[\w_.-]+\.[\w]+[\w]+[\w]/;//espressão regular
@@ -54,9 +55,35 @@ if (body_login) {//curto-circuito
     function validateLogin() {
         if (!valid_email || !valid_password) {
             return false;
-        } else {
+        } else { return true }
+    }
 
-            return true
+    function validateEmail() {
+        if (!valid_email) {
+            return false;
+        } else { return true }
+    }
+
+    function setTimeOutDanger() {
+        setTimeout(() => {
+            message.style.display = "none";
+            alert_danger.classList.add("disabled");
+        }, 2000)
+    }
+
+    function setTimeOutSuccess(location) {
+        if (location === true) {
+            setTimeout(() => {
+                message.style.display = "none";
+                alert_success.classList.add("disabled");
+                return window.location.href = location;
+            }, 3000)
+        } else {
+            setTimeout(() => {
+                message.style.display = "none";
+                alert_success.classList.add("disabled");
+                return window.location.href = "";
+            }, 6000)
         }
     }
 
@@ -68,14 +95,11 @@ if (body_login) {//curto-circuito
         e.preventDefault();
         if (validateLogin() === false) {
             message.style.display = "block";//fazer no cadastro
-            
+
             alert_danger.innerHTML = `preencha os dados corretamente!`;
             alert_danger.classList.remove("disabled");
 
-            setTimeout(() => {
-                message.style.display="none"//fazer no cadastro
-                alert_danger.classList.add("disabled");
-            }, 2000)
+            setTimeOutDanger()
             return;
         } else {
 
@@ -84,25 +108,37 @@ if (body_login) {//curto-circuito
                 //uma promisse informa que vai retornar, mas não quando,pois é assíncrona.
                 then(response => {//que é a resposta. Então consigo tratá-la.
                     alert_success.classList.remove("disabled");
-    
+
                     message.style.display = "block";//fazer no cadastro
                     alert_success.innerHTML = `Entrando...`;
 
-                    setTimeout(() => {
-                        message.style.display = "none";//fazer no cadastro
-                        alert_success.classList.add("disabled");
-                        window.location.href = "/home.html";
-                    }, 2000)
+                    setTimeOutSuccess();
                 }).catch(error => {
-                    //console.log(error)
-                    alert_danger.innerHTML = `Usuário ou senha incorretos!`;
-                    alert_danger.classList.remove("disabled");
+                    if (error.code == "auth/wrong-password") {
+                        message.style.display = "block";
+                        alert_danger.innerHTML = `Senha inválida!`;
+                        alert_danger.classList.remove("disabled");
 
-                    setTimeout(() => {
-                        alert_danger.classList.add("disabled");
-                    }, 2000)
+                        setTimeout(() => {
+                            message.style.display = "none";
+                            alert_danger.classList.add("disabled");
+                        }, 2000)
+
+                        console.log(error)
+                    } else if (error.code == "auth/user-not-found") {
+                        message.style.display = "block";
+                        alert_danger.innerHTML = `Usuário não cadastrado!`;
+                        alert_danger.classList.remove("disabled");
+
+                        setTimeout(() => {
+                            message.style.display = "none";
+                            alert_danger.classList.add("disabled");
+                        }, 2000)
+                    } else {
+                        console.log("outro erro");
+                    }
+
                 });
-
         }
     })
 
@@ -124,6 +160,42 @@ if (body_login) {//curto-circuito
         openEye.classList.remove("disabled");
         closeEye.classList.add("disabled");
     })
+
+
+    function sendEmailRecovery() {
+        message.style.display = "block";
+        alert_success.innerHTML = `caso haja esse email em nosso banco de dados você receberá um link em breve!(verifique a caixa de spam também)`;
+        alert_success.classList.remove("disabled");
+
+        setTimeout(() => {
+            message.style.display = "none";
+            alert_success.classList.add("disabled");
+        }, 7000)
+    }
+
+    function recoveryPassowrd() {
+        if (validateEmail() === false) {
+            return
+        }
+        firebase.auth().sendPasswordResetEmail(email_login.value).then(() => {
+            sendEmailRecovery();
+        }).catch(error => {
+            sendEmailRecovery();
+        });
+    }
+
+    function invalidPasswoed() {
+        firebase.auth().sendPasswordResetEmail(email_login.value).then(() => {
+            if (error.code == "auth/wrong-password") {
+                return "Senha inválida!"
+            }
+        })
+    }
+
+    forgot.addEventListener("click", () => {
+        invalidPasswoed()
+        recoveryPassowrd()
+    });
 
 
 }//fim curto-circuito do login

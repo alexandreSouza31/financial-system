@@ -1,17 +1,36 @@
 /* general */
-.body-login,.body-register {
+body {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    
+    margin: 0;
+
 }
-h1{
+
+h1 {
     height: 100px;
 }
+
 h3 {
     margin: 10px;
+}
+
+.message {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+.alert-success,
+.alert-danger {
+    position: fixed;
+    top: 50%;
+    margin: 0 auto;
+    width: 80%;
 }
 
 form {
@@ -24,14 +43,15 @@ form {
     /* border-radius: 10px; */
 }
 
-.bi-check{
+.bi-check {
     font-size: 2rem;
     color: #04c004;
     top: 5px;
     position: relative;
-    
+
 
 }
+
 input {
     padding: 10px;
     margin-bottom: 10px;
@@ -54,13 +74,21 @@ button {
 
 #forgot {
     border: none;
+    margin: 0;
+    padding: 0;
+}
+
+#enter-btn,#register-btn {
+    margin: 20px 0;
+
 }
 
 #forgot:hover {
     background-color: transparent;
 }
 
-a{
+a {
+    margin-top: 10px;
     color: white;
 }
 
@@ -78,33 +106,34 @@ footer {
     flex-direction: column;
     height: 100vh;
     flex-grow: 1;
-    
+
 }
 
 h3 {
     margin: 10px;
 }
+
 /* .navbar{
     width: 100vw;
     top: 0px;
 } */
-.container-home{
+.container-home {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     flex-grow: 1;
-  
+
 }
 
-#enter-btn:active{
+#enter-btn:active {}
+
+.bi-eye,
+.bi-eye-slash {
+    width: 10%;
+    padding: 5px;
 }
 
-/* .bi-eye{
+.disabled {
     display: none;
-} */
-
-.disabled{
-    display: none;
 }
-
