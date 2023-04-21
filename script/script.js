@@ -2,6 +2,7 @@
 let body_login = document.querySelector(".body-login");
 let body_register = document.querySelector(".body-register");
 
+let message = document.querySelector(".message");
 let alert_danger = document.querySelector(".alert-danger");
 let alert_success = document.querySelector(".alert-success");
 
@@ -15,8 +16,6 @@ if (body_login) {//curto-circuito
     let label_password_login = document.querySelector(".label-password-login");
     valid_password = false;
 
-    alert_danger.classList.add("disabled");
-    alert_success.classList.add("disabled");
 
     const enter_btn = document.querySelector("#enter-btn");
 
@@ -61,14 +60,20 @@ if (body_login) {//curto-circuito
         }
     }
 
+    alert_danger.classList.add("disabled");
+    alert_success.classList.add("disabled");
+
 
     enter_btn.addEventListener("click", (e) => {
         e.preventDefault();
         if (validateLogin() === false) {
+            message.style.display = "block";//fazer no cadastro
+            
             alert_danger.innerHTML = `preencha os dados corretamente!`;
             alert_danger.classList.remove("disabled");
 
             setTimeout(() => {
+                message.style.display="none"//fazer no cadastro
                 alert_danger.classList.add("disabled");
             }, 2000)
             return;
@@ -79,14 +84,18 @@ if (body_login) {//curto-circuito
                 //uma promisse informa que vai retornar, mas não quando,pois é assíncrona.
                 then(response => {//que é a resposta. Então consigo tratá-la.
                     alert_success.classList.remove("disabled");
+    
+                    message.style.display = "block";//fazer no cadastro
                     alert_success.innerHTML = `Entrando...`;
 
                     setTimeout(() => {
+                        message.style.display = "none";//fazer no cadastro
                         alert_success.classList.add("disabled");
                         window.location.href = "/home.html";
                     }, 2000)
                 }).catch(error => {
-                    alert_danger.innerHTML = `Usuário não encontrado!`;
+                    //console.log(error)
+                    alert_danger.innerHTML = `Usuário ou senha incorretos!`;
                     alert_danger.classList.remove("disabled");
 
                     setTimeout(() => {
@@ -94,16 +103,8 @@ if (body_login) {//curto-circuito
                     }, 2000)
                 });
 
-            // setTimeout(() => {
-            //     alert_success.classList.add("disabled");
-            //     window.location.href = "/home.html";
-            // }, 2000)
         }
     })
-
-
-
-
 
     const openEye = document.querySelector(".bi-eye");
     const closeEye = document.querySelector(".bi-eye-slash");
