@@ -66,11 +66,17 @@ if (body_login) {//curto-circuito
         e.preventDefault();
         if (validateLogin() === false) {
             alert_danger.innerHTML = `preencha os dados corretamente!`;
-            return
+            alert_danger.classList.remove("disabled");
+
+            setTimeout(() => {
+                alert_danger.classList.add("disabled");
+            }, 2000)
+            return;
         } else {
-            alert_success.classList.remove("disabled")
+            alert_success.classList.remove("disabled");
             alert_success.innerHTML = `Entrando...`;
             setTimeout(() => {
+                alert_success.classList.add("disabled");
                 window.location.href = "/home.html";
             }, 2000)
         }
