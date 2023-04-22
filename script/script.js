@@ -109,7 +109,7 @@ if (body_login) {//curto-circuito
             firebase.auth().signInWithEmailAndPassword(email_login.value, password_login.value).//retorna uma promisse
                 //uma promisse informa que vai retornar, mas não quando,pois é assíncrona.
                 then(response => {//que é a resposta. Então consigo tratá-la.
-                    
+
                     alert_success.innerHTML = `Entrando...`;
 
                     setTimeOutSuccess("/home.html");
@@ -235,18 +235,35 @@ if (body_register) {//início curto-circuito register
 
     password_register.addEventListener("keyup", () => {
         if (password_register.value.length < 6) {
-
             password_register.setAttribute("style", "border-color:red");
             label_password_register.setAttribute("style", "color:red");
             label_password_register.innerHTML = `Senha: mínimo 6 caracteres`;
             valid_password = false;
         } else {
-            password_register.setAttribute("style", "border-color:#04c004;");
-            label_password_register.setAttribute("style", "color:black");
-            label_password_register.innerHTML = `Senha: <i class="bi bi-check"></i>`;
-            valid_password = true;
+            validatePasswordsMatch()
+            passwordCorrect();
         }
     })
+
+    function passwordCorrect() {
+        password_register.setAttribute("style", "border-color:#04c004;");
+        label_password_register.setAttribute("style", "color:black");
+        label_password_register.innerHTML = `Senha: <i class="bi bi-check"></i>`;
+        valid_password = true;
+    }
+
+    function confirmCorrect(){
+        confirm_register.setAttribute("style", "border-color:#04c004;");
+        label_confirm_register.setAttribute("style", "color:black");
+        label_confirm_register.innerHTML = `Confirme sua senha: <i class="bi bi-check"></i>`;
+        valid_confirm = true;
+    }
+    function validatePasswordsMatch() {//validar se as senhas batem não importando a ordem de digitação
+        if (password_register.value == confirm_register.value) {
+            passwordCorrect();
+            confirmCorrect();
+        }
+    }
 
     confirm_register.addEventListener("keyup", () => {
         if (password_register.value !== confirm_register.value) {
@@ -256,10 +273,7 @@ if (body_register) {//início curto-circuito register
             label_confirm_register.innerHTML = `Confirme: as senhas não conferem`;
             valid_confirm = false;
         } else {
-            confirm_register.setAttribute("style", "border-color:#04c004;");
-            label_confirm_register.setAttribute("style", "color:black");
-            label_confirm_register.innerHTML = `Confirme sua senha: <i class="bi bi-check"></i>`;
-            valid_confirm = true;
+            confirmCorrect();
         }
     })
 
@@ -275,7 +289,7 @@ if (body_register) {//início curto-circuito register
         }
     }
 
-    
+
     alert_danger.classList.add("disabled");
     alert_success.classList.add("disabled");
 
