@@ -351,8 +351,24 @@ if (body_register) {//início curto-circuito register
             setTimeOutDanger();
             return
         } else {
-            alert_success.innerHTML = `Usuário cadastrado com sucesso!`;
-            setTimeOutSuccess("/index.html");
+            firebase.auth().createUserWithEmailAndPassword(
+                email_register.value, password_register.value
+            ).then(() => {
+                alert_success.innerHTML = `Usuário cadastrado com sucesso!`;
+                setTimeOutSuccess("/index.html");
+                
+            }).catch(error => {
+                //alert(error)
+                if (error.code == "auth/email-already-in-use") {
+                    alert_danger.innerHTML = `usuário já cadastrado! faça login`;
+
+                    setTimeOutDanger();
+
+                    console.log(error)
+                } else {
+                    console.log("outro erro");
+                }
+            }) 
         }
     })
 
