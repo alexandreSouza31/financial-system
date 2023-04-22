@@ -235,11 +235,14 @@ if (body_register) {//início curto-circuito register
 
     password_register.addEventListener("keyup", () => {
         if (password_register.value.length < 6) {
-            password_register.setAttribute("style", "border-color:red");
-            label_password_register.setAttribute("style", "color:red");
             label_password_register.innerHTML = `Senha: mínimo 6 caracteres`;
-            valid_password = false;
-        } else {
+            validatePasswordsMatch();
+            passwordIncorrect();
+        } else if (password_register.value.length >= 6 && password_register.value !== confirm_register.value) {
+            label_password_register.innerHTML = `Senha: as senhas não conferem`;
+            validatePasswordsMatch();
+        }
+        else {
             validatePasswordsMatch()
             passwordCorrect();
         }
@@ -252,27 +255,44 @@ if (body_register) {//início curto-circuito register
         valid_password = true;
     }
 
-    function confirmCorrect(){
+    function confirmCorrect() {
         confirm_register.setAttribute("style", "border-color:#04c004;");
         label_confirm_register.setAttribute("style", "color:black");
         label_confirm_register.innerHTML = `Confirme sua senha: <i class="bi bi-check"></i>`;
         valid_confirm = true;
     }
+
+    function passwordIncorrect() {
+        password_register.setAttribute("style", "border-color:red");
+            label_password_register.setAttribute("style", "color:red");
+        label_password_register.innerHTML = `Senha: as senhas não conferem<i class="bi></i>`;
+            valid_password = false;
+    }
+
+    function confirmIncorrect() {
+        confirm_register.setAttribute("style", "border-color:red");
+        label_confirm_register.setAttribute("style", "color:red");
+        label_confirm_register.innerHTML = `Confirme: as senhas não conferem`;
+        label_password_register.innerHTML = `Senha: as senhas não conferem<i class="bi></i>`;
+        valid_confirm = false;
+    }
+
     function validatePasswordsMatch() {//validar se as senhas batem não importando a ordem de digitação
         if (password_register.value == confirm_register.value) {
             passwordCorrect();
             confirmCorrect();
+        } else{
+            passwordIncorrect();
+            confirmIncorrect();
         }
     }
 
     confirm_register.addEventListener("keyup", () => {
         if (password_register.value !== confirm_register.value) {
-
-            confirm_register.setAttribute("style", "border-color:red");
-            label_confirm_register.setAttribute("style", "color:red");
-            label_confirm_register.innerHTML = `Confirme: as senhas não conferem`;
-            valid_confirm = false;
+            validatePasswordsMatch()
+            confirmIncorrect();
         } else {
+            validatePasswordsMatch()
             confirmCorrect();
         }
     })
@@ -294,7 +314,7 @@ if (body_register) {//início curto-circuito register
     alert_success.classList.add("disabled");
 
     function setTimeOutDanger() {
-        message.style.display = "block";//fazer no cadastro
+        message.style.display = "block";
         alert_danger.classList.remove("disabled");
         setTimeout(() => {
             message.style.display = "none";
@@ -302,10 +322,10 @@ if (body_register) {//início curto-circuito register
         }, 2000)
     }
 
-    function setTimeOutSuccess(location) {
+    function setTimeOutSuccess(location) {//quero que mostre que o email foi enviado mesmo que não exista. Questões de segurança.
         if (location === true) {
             alert_success.classList.remove("disabled");
-            message.style.display = "block";//fazer no cadastro
+            message.style.display = "block";
             setTimeout(() => {
                 message.style.display = "none";
                 alert_success.classList.add("disabled");
@@ -313,7 +333,7 @@ if (body_register) {//início curto-circuito register
             }, 3000)
         } else {
             alert_success.classList.remove("disabled");
-            message.style.display = "block";//fazer no cadastro
+            message.style.display = "block";
             setTimeout(() => {
                 message.style.display = "none";
                 alert_success.classList.add("disabled");
@@ -331,12 +351,8 @@ if (body_register) {//início curto-circuito register
             setTimeOutDanger();
             return
         } else {
-            alert_success.classList.remove("disabled");
             alert_success.innerHTML = `Usuário cadastrado com sucesso!`;
-            setTimeout(() => {
-                name_register.value = ""; email_register.value = ""; password_register.value = ""; confirm_register.value = ""
-                window.location.href = "/index.html";
-            }, 2000)
+            setTimeOutSuccess("/index.html");
         }
     })
 
