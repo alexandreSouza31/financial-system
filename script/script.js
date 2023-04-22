@@ -222,10 +222,7 @@ if (body_register) {//início curto-circuito register
         let text = this.value;
         if (!standard_email.test(text)) {
 
-            email_register.setAttribute("style", "border-color:red");
-            label_email_register.setAttribute("style", "color:red");
-            label_email_register.innerHTML = `Email: insira um email válido <i class="bi"></i>`;
-            valid_email = false;
+            emailIncorrect();
         } else {
             email_register.setAttribute("style", "border-color:#04c004;");
             label_email_register.setAttribute("style", "color:black");
@@ -246,7 +243,12 @@ if (body_register) {//início curto-circuito register
         validatePasswordsMatch()
     })
 
-
+    function emailIncorrect() {
+        email_register.setAttribute("style", "border-color:red");
+        label_email_register.setAttribute("style", "color:red");
+        label_email_register.innerHTML = `Email: insira um email válido <i class="bi"></i>`;
+        valid_email = false;
+    }
     function passwordCorrect() {
         password_register.setAttribute("style", "border-color:#04c004;");
         label_password_register.setAttribute("style", "color:black");
@@ -366,7 +368,7 @@ if (body_register) {//início curto-circuito register
 
                 if (error.code == "auth/email-already-in-use") {
                     alert_danger.innerHTML = `usuário já cadastrado! faça login`;
-                
+                    emailIncorrect();
 
                     setTimeOutDanger();
                 } else {
