@@ -6,16 +6,11 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-
 }
 
-h1 {
-    height: 100px;
-}
+h1 {height: 100px;}
 
-h3 {
-    margin: 10px;
-}
+h3 {margin: 10px;}
 
 .message {
     display: none;
@@ -33,6 +28,16 @@ h3 {
     width: 80%;
 }
 
+.body-register .alert-success,
+.body-register .alert-danger {
+    position: fixed;
+    top: 50%;
+    left: 10%;
+    width: 80%;
+}
+
+
+
 form {
     display: flex;
     flex-direction: column;
@@ -48,8 +53,6 @@ form {
     color: #04c004;
     top: 5px;
     position: relative;
-
-
 }
 
 input {
@@ -106,7 +109,6 @@ footer {
     flex-direction: column;
     height: 100vh;
     flex-grow: 1;
-
 }
 
 h3 {
@@ -123,7 +125,6 @@ h3 {
     align-items: center;
     justify-content: center;
     flex-grow: 1;
-
 }
 
 #enter-btn:active {}
@@ -134,6 +135,4 @@ h3 {
     padding: 5px;
 }
 
-.disabled {
-    display: none;
-}
+.disabled {display: none;}

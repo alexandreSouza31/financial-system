@@ -189,9 +189,6 @@ if (body_register) {//início curto-circuito register
     let label_password_register = document.querySelector(".label-password-register");
     let label_confirm_register = document.querySelector(".label-confirm-register");
 
-    alert_danger.classList.add("disabled");
-    alert_success.classList.add("disabled");
-
     const name_register = document.querySelector(".name-register");
     let valid_name = false;
     const email_register = document.querySelector(".email-register");
@@ -278,16 +275,46 @@ if (body_register) {//início curto-circuito register
         }
     }
 
+    
+    alert_danger.classList.add("disabled");
+    alert_success.classList.add("disabled");
+
+    function setTimeOutDanger() {
+        message.style.display = "block";//fazer no cadastro
+        alert_danger.classList.remove("disabled");
+        setTimeout(() => {
+            message.style.display = "none";
+            alert_danger.classList.add("disabled");
+        }, 2000)
+    }
+
+    function setTimeOutSuccess(location) {
+        if (location === true) {
+            alert_success.classList.remove("disabled");
+            message.style.display = "block";//fazer no cadastro
+            setTimeout(() => {
+                message.style.display = "none";
+                alert_success.classList.add("disabled");
+                return window.location.href = location;
+            }, 3000)
+        } else {
+            alert_success.classList.remove("disabled");
+            message.style.display = "block";//fazer no cadastro
+            setTimeout(() => {
+                message.style.display = "none";
+                alert_success.classList.add("disabled");
+                return window.location.href = "";
+            }, 5000)
+        }
+    }
+
 
     register_btn.addEventListener("click", (e) => {
         e.preventDefault();
         if (validateRegister() === false) {
-            alert_danger.classList.remove("disabled");
             alert_danger.innerHTML = `preencha os dados corretamente!`;
 
-            setTimeout(() => {
-                alert_danger.classList.add("disabled");;
-            }, 2000)
+            setTimeOutDanger();
             return
         } else {
             alert_success.classList.remove("disabled");
