@@ -200,7 +200,6 @@ if (body_register) {//início curto-circuito register
 
     const register_btn = document.querySelector("#register-btn");
 
-
     name_register.addEventListener("keyup", () => {
         if (name_register.value.length < 3) {
 
@@ -236,16 +235,13 @@ if (body_register) {//início curto-circuito register
     password_register.addEventListener("keyup", () => {
         if (password_register.value.length < 6) {
             label_password_register.innerHTML = `Senha: mínimo 6 caracteres`;
-            validatePasswordsMatch();
-            passwordIncorrect();
-        } else if (password_register.value.length >= 6 && password_register.value !== confirm_register.value) {
-            label_password_register.innerHTML = `Senha: as senhas não conferem`;
-            validatePasswordsMatch();
+            passwordIncorrect()
         }
-        else {
-            validatePasswordsMatch()
-            passwordCorrect();
-        }
+        validatePasswordsMatch()
+    })
+
+    confirm_register.addEventListener("keyup", () => {
+        validatePasswordsMatch()
     })
 
     function passwordCorrect() {
@@ -264,39 +260,41 @@ if (body_register) {//início curto-circuito register
 
     function passwordIncorrect() {
         password_register.setAttribute("style", "border-color:red");
-            label_password_register.setAttribute("style", "color:red");
-        label_password_register.innerHTML = `Senha: as senhas não conferem<i class="bi></i>`;
-            valid_password = false;
+        label_password_register.setAttribute("style", "color:red");
+        valid_password = false;
     }
 
     function confirmIncorrect() {
         confirm_register.setAttribute("style", "border-color:red");
         label_confirm_register.setAttribute("style", "color:red");
-        label_confirm_register.innerHTML = `Confirme: as senhas não conferem`;
-        label_password_register.innerHTML = `Senha: as senhas não conferem<i class="bi></i>`;
         valid_confirm = false;
     }
 
     function validatePasswordsMatch() {//validar se as senhas batem não importando a ordem de digitação
-        if (password_register.value == confirm_register.value) {
-            passwordCorrect();
-            confirmCorrect();
-        } else{
-            passwordIncorrect();
-            confirmIncorrect();
+        if (password_register.value.length < 6 && password_register.value !== confirm_register.value) {
+            label_password_register.innerHTML = `Senha: mínimo 6 caracteres<i class="bi></i>`;
+            label_confirm_register.innerHTML = `Confirm: mínimo 6 caracteres<i class="bi></i>`;
+            passwordIncorrect()
+            confirmIncorrect()
+            return
+
+        }else if (password_register.value.length >= 6 && password_register.value === confirm_register.value) {
+            passwordCorrect()
+            confirmCorrect()
+            return
+        }
+        else if (password_register.value.length < 6 && password_register.value === confirm_register.value) {
+            label_password_register.innerHTML = `Senha: mínimo 6 caracteres<i class="bi></i>`;
+            label_confirm_register.innerHTML = `Confirm: mínimo 6 caracteres<i class="bi></i>`;
+            return
+        } else {
+            label_password_register.innerHTML = `Senha: as senhas não conferem<i class="bi></i>`;
+            label_confirm_register.innerHTML = `Confirm: as senhas não conferem<i class="bi></i>`;
+            passwordIncorrect()
+            confirmIncorrect()
+            return
         }
     }
-
-    confirm_register.addEventListener("keyup", () => {
-        if (password_register.value !== confirm_register.value) {
-            validatePasswordsMatch()
-            confirmIncorrect();
-        } else {
-            validatePasswordsMatch()
-            confirmCorrect();
-        }
-    })
-
 
     function validateRegister() {
         if (!valid_name || !valid_email || !valid_password || !valid_confirm) {
@@ -308,7 +306,6 @@ if (body_register) {//início curto-circuito register
             return true
         }
     }
-
 
     alert_danger.classList.add("disabled");
     alert_success.classList.add("disabled");
@@ -356,19 +353,17 @@ if (body_register) {//início curto-circuito register
             ).then(() => {
                 alert_success.innerHTML = `Usuário cadastrado com sucesso!`;
                 setTimeOutSuccess("/index.html");
-                
+
             }).catch(error => {
                 //alert(error)
                 if (error.code == "auth/email-already-in-use") {
                     alert_danger.innerHTML = `usuário já cadastrado! faça login`;
 
                     setTimeOutDanger();
-
-                    console.log(error)
                 } else {
-                    console.log("outro erro");
+                    console.log("erro inesperado");
                 }
-            }) 
+            })
         }
     })
 
