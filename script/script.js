@@ -74,7 +74,7 @@ if (body_login) {//curto-circuito
     }
 
     function setTimeOutSuccess(location) {
-        if (location === true) {
+        if (location !== "") {
             alert_success.classList.remove("disabled");
             message.style.display = "block";//fazer no cadastro
             setTimeout(() => {
@@ -90,6 +90,7 @@ if (body_login) {//curto-circuito
                 alert_success.classList.add("disabled");
                 return window.location.href = "";
             }, 5000)
+            console.log("caiu no falso")
         }
     }
 
@@ -98,6 +99,7 @@ if (body_login) {//curto-circuito
 
 
     enter_btn.addEventListener("click", (e) => {
+        message.style.display = "block";
         e.preventDefault();
         if (validateLogin() === false) {
             alert_danger.innerHTML = `preencha os dados corretamente!`;
@@ -222,7 +224,7 @@ if (body_register) {//início curto-circuito register
 
             email_register.setAttribute("style", "border-color:red");
             label_email_register.setAttribute("style", "color:red");
-            label_email_register.innerHTML = `Email: insira um email válido`;
+            label_email_register.innerHTML = `Email: insira um email válido <i class="bi"></i>`;
             valid_email = false;
         } else {
             email_register.setAttribute("style", "border-color:#04c004;");
@@ -243,6 +245,7 @@ if (body_register) {//início curto-circuito register
     confirm_register.addEventListener("keyup", () => {
         validatePasswordsMatch()
     })
+
 
     function passwordCorrect() {
         password_register.setAttribute("style", "border-color:#04c004;");
@@ -278,7 +281,7 @@ if (body_register) {//início curto-circuito register
             confirmIncorrect()
             return
 
-        }else if (password_register.value.length >= 6 && password_register.value === confirm_register.value) {
+        } else if (password_register.value.length >= 6 && password_register.value === confirm_register.value) {
             passwordCorrect()
             confirmCorrect()
             return
@@ -320,9 +323,10 @@ if (body_register) {//início curto-circuito register
     }
 
     function setTimeOutSuccess(location) {//quero que mostre que o email foi enviado mesmo que não exista. Questões de segurança.
-        if (location === true) {
+        if (location !== "") {
             alert_success.classList.remove("disabled");
             message.style.display = "block";
+            console.log("primeiro")
             setTimeout(() => {
                 message.style.display = "none";
                 alert_success.classList.add("disabled");
@@ -330,7 +334,8 @@ if (body_register) {//início curto-circuito register
             }, 3000)
         } else {
             alert_success.classList.remove("disabled");
-            message.style.display = "block";
+
+            console.log("segundo")
             setTimeout(() => {
                 message.style.display = "none";
                 alert_success.classList.add("disabled");
@@ -342,7 +347,9 @@ if (body_register) {//início curto-circuito register
 
     register_btn.addEventListener("click", (e) => {
         e.preventDefault();
+        message.style.display = "block";
         if (validateRegister() === false) {
+
             alert_danger.innerHTML = `preencha os dados corretamente!`;
 
             setTimeOutDanger();
@@ -356,8 +363,10 @@ if (body_register) {//início curto-circuito register
 
             }).catch(error => {
                 //alert(error)
+
                 if (error.code == "auth/email-already-in-use") {
                     alert_danger.innerHTML = `usuário já cadastrado! faça login`;
+                
 
                     setTimeOutDanger();
                 } else {
