@@ -1,17 +1,19 @@
-//como os arquivos estão separados agora não preciso fazer o curto circuito!
-
-
-let body_login = document.querySelector(".body-login");
 let body_register = document.querySelector(".body-register");
 
-let message = document.querySelector(".message");
-let alert_danger = document.querySelector(".alert-danger");
-let alert_success = document.querySelector(".alert-success");
+if (body_register) {
 
-alert_success.classList.add("disabled")
-alert_danger.classList.add("disabled")
 
-let label_name_register = document.querySelector(".label-name-register");
+    let body_login = document.querySelector(".body-login");
+    let body_register = document.querySelector(".body-register");
+
+    let message = document.querySelector(".message");
+    let alert_danger = document.querySelector(".alert-danger");
+    let alert_success = document.querySelector(".alert-success");
+
+    alert_success.classList.add("disabled")
+    alert_danger.classList.add("disabled")
+
+    let label_name_register = document.querySelector(".label-name-register");
     let label_email_register = document.querySelector(".label-email-register");
     let label_password_register = document.querySelector(".label-password-register");
     let label_confirm_register = document.querySelector(".label-confirm-register");
@@ -203,9 +205,13 @@ let label_name_register = document.querySelector(".label-name-register");
         }
     })
 
+    
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             window.location.href = "/home.html";
         }
     })
 
+
+
+}

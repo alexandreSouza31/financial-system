@@ -1,10 +1,11 @@
 
 let body_login = document.querySelector(".body-login");
-let body_register = document.querySelector(".body-register");
 
-let message = document.querySelector(".message");
-let alert_danger = document.querySelector(".alert-danger");
-let alert_success = document.querySelector(".alert-success");
+if (body_login) {
+
+    let message = document.querySelector(".message");
+    let alert_danger = document.querySelector(".alert-danger");
+    let alert_success = document.querySelector(".alert-success");
 
     const email_login = document.querySelector(".email-login");
     let label_email_login = document.querySelector(".label-email-login");
@@ -178,11 +179,12 @@ let alert_success = document.querySelector(".alert-success");
         recoveryPassowrd()
     });
 
-    firebase.auth().onAuthStateChanged(user => {
+    
+    firebase.auth().onAuthStateChanged(user => {//matém usuário logado, caso tenha feito login
         if (user) {
             window.location.href = "/home.html";
         }
     })
 
 
-
+}
