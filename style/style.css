@@ -75,6 +75,11 @@ button {
     cursor: pointer;
 }
 
+.bi-eye,
+.bi-eye-slash {
+    width: 10%;
+    padding: 5px;
+}
 
 #forgot {
     border: none;
@@ -101,6 +106,7 @@ footer {
     margin: 0;
     padding: 20px;
     text-align: center;
+    max-height: 50px;
 }
 
 /*home*/
@@ -109,31 +115,52 @@ footer {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    flex-grow: 1;
+    
+}
+
+.container-nav{
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 h3 {
     margin: 10px;
 }
 
-/* .navbar{
-    width: 100vw;
-    top: 0px;
-} */
 .container-home {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    flex-grow: 1;
+    /* justify-content: center; */
+  
 }
+
+.accordion{
+    margin: 0 auto;
+    width: 100vw;
+}
+
+ul{
+    margin: 0 auto;
+    padding: 0;
+}
+
+li{
+    list-style: none;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 1% auto;
+}
+
+
+
 
 #enter-btn:active {}
 
-.bi-eye,
-.bi-eye-slash {
-    width: 10%;
-    padding: 5px;
-}
+
 
 .disabled {display: none;}
+

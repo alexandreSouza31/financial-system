@@ -3,6 +3,7 @@ let message = document.querySelector(".message");
 
 if (body_home) {
     const out_btn = document.querySelector("#out-btn");
+    const h3 = document.querySelector(".h3-home");
 
     function logout() {
         firebase.auth().signOut().then(() => {
@@ -22,4 +23,11 @@ if (body_home) {
         message.style.backgroundColor="red"
         message.style.display = "block";
     } 
+
+    firebase.auth().onAuthStateChanged(user => {//matém usuário logado, caso tenha feito login
+        if (user) {
+            console.log(user)
+            // h3.innerHTML=`Olá, ${user}`
+        }
+    })
 }
