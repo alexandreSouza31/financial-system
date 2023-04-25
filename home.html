@@ -33,6 +33,10 @@
     <title>financial system</title>
   </head>
   <body class="body-home">
+    <div class="message"></div>
+    <div class="alert alert-danger disabled" role="alert"></div>
+    <div class="alert alert-success disabled" role="alert"></div>
+
     <h1>Minhas Finanças</h1>
 
     <div class="container-nav">
@@ -42,12 +46,11 @@
       </button>
     </div>
 
-    <div class="message"></div>
 
     <div class="container-home">
 
       <div class="accordion" id="accordionPanelsStayOpenExample">
-        <div class="accordion-item">
+        <!-- <div class="accordion-item">
           <h2 class="accordion-header" id="resume-header">
             <button id="btn-resume" class="accordion-button" type="button"
               data-bs-toggle="collapse"
@@ -72,8 +75,7 @@
 
             </div>
           </div>
-        </div>
-
+        </div> -->
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button class="accordion-button collapsed bg-light text-dark"
@@ -95,9 +97,9 @@
 
                 <div class="div-amount">
                   <label for="amount">Valor</label>
-                  <input class="amount" type="text">
+                  <input class="amount" type="number">
                 </div>
-                
+
                 <div class="div-date">
                   <label for="date">Data</label>
                   <input class="date" type="date">
@@ -106,6 +108,7 @@
                 <div class="div-type">
                   <label for="type">Tipo</label>
                   <select id="type">
+                    <option>Digite o tipo da transação</option>
                     <option>Entrada</option>
                     <option>Saída</option>
                   </select>
@@ -180,7 +183,7 @@
                     </tr>
                   </thead>
                   <tbody class="tbody-expense">
-                    
+
                   </tbody>
                 </table>
               </div>
