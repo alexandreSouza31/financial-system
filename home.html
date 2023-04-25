@@ -22,6 +22,9 @@
     <script
       src="https://www.gstatic.com/firebasejs/9.20.0/firebase-auth-compat.js"
       defer></script>
+    <script
+      src="https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore-compat.js"
+      defer></script>
     <script src="/script/firebase.js" defer></script>
 
     <!--end links firebase authentication and configs-->
@@ -45,8 +48,8 @@
 
       <div class="accordion" id="accordionPanelsStayOpenExample">
         <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button bg-blue text-dark" type="button"
+          <h2 class="accordion-header" id="resume-header">
+            <button id="btn-resume" class="accordion-button" type="button"
               data-bs-toggle="collapse"
               data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
               aria-controls="panelsStayOpen-collapseOne">
@@ -55,15 +58,69 @@
           </h2>
           <div id="panelsStayOpen-collapseOne" class="accordion-collapse
             collapse show">
-            <div class="accordion-body">
-            
-                <p>Entradas: R$ </p><span class="span-credit"></span>
-                <p>Saídas: R$ </p><span class="span-debit"></span>
-                <p>Saldo: R$ </p><span class="balance"></span>
-              
+            <div class="accordion-body accordion-resume">
+
+              <div class="item-resume">
+                <p>Entradas: R$ </p><span class="span-income">3200</span>
+              </div>
+              <div class="item-resume">
+                <p>Saídas: R$ </p><span class="span-expense">2300</span>
+              </div>
+              <div class="item-resume">
+                <p>Saldo: R$ </p><span class="balance">900</span>
+              </div>
+
             </div>
           </div>
         </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed bg-light text-dark"
+              type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapse" aria-expanded="false"
+              aria-controls="panelsStayOpen-collapse">
+              Incluir novo
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapse" class="accordion-collapse
+            collapse">
+
+            <div class="accordion-body" id="container-include">
+              <div class="include">
+                <div class="desc">
+                  <label for="description">Descrição</label>
+                  <input class="description" type="text">
+                </div>
+
+                <div class="div-amount">
+                  <label for="amount">Valor</label>
+                  <input class="amount" type="text">
+                </div>
+                
+                <div class="div-date">
+                  <label for="date">Data</label>
+                  <input class="date" type="date">
+                </div>
+
+                <div class="div-type">
+                  <label for="type">Tipo</label>
+                  <select id="type">
+                    <option>Entrada</option>
+                    <option>Saída</option>
+                  </select>
+                </div>
+
+                <button type="button" id="include-btn" class="btn
+                  btn-outline-dark">incluir
+                </button>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
 
 
         <div class="accordion-item">
@@ -78,31 +135,32 @@
           <div id="panelsStayOpen-collapseTwo" class="accordion-collapse
             collapse">
             <div class="accordion-body">
-              <!-- <strong class="strong2">Aqui ficarão as entradas.</strong> -->
-              <ul>
-                <li>salário 1</li>
-                <li>salário 2</li>
-                <li>aluguel</li>
-                <li>salário 1</li>
-                <li>salário 2</li>
-                <li>aluguel</li>
-                <li>salário 1</li>
-                <li>salário 2</li>
-                <li>aluguel</li>
-                <li>salário 1</li>
-                <li>salário 2</li>
-                <li>aluguel</li>
-              </ul>
+
+              <div class="table-income">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Descrição</th>
+                      <th class="column-income">Valor</th>
+                      <th class="column-date">Data</th>
+                      <th class="column-action"></th>
+                    </tr>
+                  </thead>
+                  <tbody class="tbody-income">
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
-      
-    
+
+
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button class="accordion-button collapsed bg-danger text-light"
               type="button" data-bs-toggle="collapse"
-              data-bs-target="#panelsStayOpen-collapseTree" aria-expanded="false"
+              data-bs-target="#panelsStayOpen-collapseTree"
+              aria-expanded="false"
               aria-controls="panelsStayOpen-collapseTree">
               Saídas
             </button>
@@ -110,29 +168,22 @@
           <div id="panelsStayOpen-collapseTree" class="accordion-collapse
             collapse">
             <div class="accordion-body">
-              <ul>
-                <li>supermercado</li>
-                <li>seguro do carro</li>
-                <li>cartão santander</li>
-                <li>supermercado</li>
-                <li>seguro do carro</li>
-                <li>cartão santander</li>
-                <li>supermercado</li>
-                <li>seguro do carro</li>
-                <li>cartão santander</li>
-                <li>supermercado</li>
-                <li>seguro do carro</li>
-                <li>cartão santander</li>
-                <li>supermercado</li>
-                <li>seguro do carro</li>
-                <li>cartão santander</li>
-                <li>supermercado</li>
-                <li>seguro do carro</li>
-                <li>cartão santander</li>
-                <li>supermercado</li>
-                <li>seguro do carro</li>
-                <li>cartão santander</li>
-              </ul>
+
+              <div class="table-expense">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Descrição</th>
+                      <th class="column-expense">Valor</th>
+                      <th class="column-type">Data</th>
+                      <th class="column-action"></th>
+                    </tr>
+                  </thead>
+                  <tbody class="tbody-expense">
+                    
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

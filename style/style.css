@@ -1,4 +1,10 @@
 /* general */
+*{
+    font-size: 1.15rem;
+    box-sizing: border-box;
+    font-family: "poppins",sans-serif;
+    outline: none;
+}
 body {
     display: flex;
     flex-direction: column;
@@ -18,6 +24,7 @@ h3 {margin: 10px;}
     position: fixed;
     width: 100%;
     height: 100%;
+    z-index: 1;
 }
 
 .alert-success,
@@ -57,6 +64,7 @@ form {
 }
 
 input {
+    
     padding: 10px;
     margin-bottom: 10px;
     border: none;
@@ -118,11 +126,17 @@ footer {
     
 }
 
+.body-home h1{
+    margin-top: 100px;
+  
+}
+
 .container-nav{
     width: 100vw;
+    padding: 10px;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 h3 {
@@ -142,24 +156,101 @@ h3 {
     width: 100vw;
 }
 
-ul{
-    margin: 0 auto;
-    padding: 0;
+.item-resume{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0px 0px 5px #ccc;
+    border-radius: 10px;
+    margin: 10px auto;
+    
 }
 
-li{
+.item-resume p{
+    font-size: 1.1rem;
+    position: relative;
+    top: 10px;
+
+}
+
+#btn-resume{
+    background-color:  #62929E;
+    color: white;
+}
+
+.include{
+    width: 90vw;
+    margin: 20px auto;
+    background-color: #62929E;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+#container-include{
+    display: flex;
+    justify-content: center;
+}
+
+.desc,.div-amount,.div-date,.div-type{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+}
+
+input[date]{
+    border: none;
+}
+.desc,.div-amount label{
+    position: relative;
+    top: 20px;
+}
+
+
+.table-amount{
+    width: 100;
+    display: flex;
+    justify-content: center;
+}
+
+table{
+    width: 98%;
+    
+}
+
+th{
+    text-align: center;
+
+}
+
+.body-home i{
+    font-size: 25px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.column-amount{
+    width: 30%;
+}
+
+
+td{
     list-style: none;
     border: 1px solid gray;
     border-radius: 10px;
     padding: 10px;
-    margin: 1% auto;
+    margin: 5px auto;
+    font-size: .9rem;
+    flex-wrap: wrap;
 }
 
-
-
-
-#enter-btn:active {}
-
+.bi-trash3{
+    position: relative;
+    top: 5px;
+    left: 5px;
+}
 
 
 .disabled {display: none;}
