@@ -40,25 +40,21 @@ if (body_home) {
     const input_amount = document.querySelector(".amount");
     const input_date = document.querySelector(".date");
     const input_type = document.querySelector("#type")
-    const opt_include = document.querySelector(".opt-include");
-    const opt_expense = document.querySelector(".opt-expense");
     const include_btn = document.querySelector("#include-btn");
 
     const tbody_income = document.querySelector(".tbody-income");
     const tbody_expense = document.querySelector(".tbody-expense");
 
     //resume
-    const span_income = document.querySelector(".span-credit");
-    const span_expense = document.querySelector(".span-expense");
-    const balance = document.querySelector(".balance");
+    // const span_income = document.querySelector(".span-credit");
+    // const span_expense = document.querySelector(".span-expense");
+    // const balance = document.querySelector(".balance");
 
     //agr preciso acessar somente os registros daquele usuário em específico:
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             findTransactions_expense(user);
             findTransactions_income(user);
-            //findUser(user)
-
         }
     })
 
@@ -79,7 +75,6 @@ if (body_home) {
             })
             .catch(error => {
                 message.style.display = "none";
-                //console.log(error)
             })
     }
 
@@ -99,26 +94,6 @@ if (body_home) {
             })
     }
 
-
-    // function findUser(user) {//busca o usuário
-    //     firebase.firestore()
-    //         .collection("users")
-    //         //.where("user.uid", "==", user.uid)
-    //         .get()
-    //         .then(snapshot => {
-    //             const user=snapshot.docs.map(doc => doc.data())
-    //             addUserInScreen(user);
-
-    //     })
-    // }
-
-
-    // function addUserInScreen(user) {
-    //     user.forEach(user => {
-    //         h3.innerHTML = `Olá, ${user.name}`
-    //     })
-    // }
-
     function addTransactionsIncomeToScreen(transactions) {//recebe as transações e adiciona na tela
         transactions.forEach(transaction => {
 
@@ -126,7 +101,7 @@ if (body_home) {
             tr_income.classList.add(transaction.type);
             tr_income.innerHTML =
                 `<td>${transaction.description}</td>
-                <td>${transaction.amount}</td>
+                <td>${transaction.amount.toFixed(2)}</td>
                 <td>${formatDate(transaction.date)}</td>
                 <i class="bi bi-trash3">
                 `
@@ -140,7 +115,7 @@ if (body_home) {
             tr_expense.classList.add(transaction.type);
             tr_expense.innerHTML =
                 `<td>${transaction.description}</td>
-                <td>${transaction.amount}</td>
+                <td>${transaction.amount.toFixed(2)}</td>
                 <td>${formatDate(transaction.date)}</td>
                 <i class="bi bi-trash3">
                 `
@@ -158,39 +133,87 @@ if (body_home) {
     let type = input_type.addEventListener("change", () => {
         if (input_type.value == "Entrada") {
             console.log("transacao de entrada")
-            return
+            
         }
         if (input_type.value == "Saída") {
             console.log("transacao de saida")
-            return
+           
         }
         return input_type.value
     })
 
     function validNew() {
-        if (input_description.value === "" || input_amount.value === "" || input_date.value === "" || input_type.value == "Digite o tipo da transação") {
+        if (input_description.value === "" || input_amount.value === "" || input_amount.value<1 || input_date.value === "" || input_type.value == "Digite o tipo da transação") {
             alert_danger.innerHTML = `preencha os dados corretamente!`;
             setTimeOutDanger()
-            return
+            return false
         }
         else {
-            alert_success.innerHTML = `transação salva com sucesso!`;
             setTimeOutSuccess();
-            input_description.value = "";
-            input_amount.value = "";
-            input_date.value = "";
-            input_type.value = "Digite o tipo da transação"
-
+            alert_success.innerHTML = `transação salva com sucesso!`;
+            return true
         }
-
-
     }
 
+    function transactionInclude() {
+        message.style.display = "block";
+        const transaction = {
+            type: input_type.value,
+            date: input_date.value,
+            amount: parseFloat(input_amount.value),
+            description: input_description.value,
+            user: {
+                uid: firebase.auth().currentUser.uid,
+            }
+        }
+        
+        if (input_type.value == "Entrada") {
+            firebase.firestore()
+                .collection("transactions_income")
+                .add(transaction)
+                .then(() => {
+                    message.style.display = "none";
+    
+                    //addTransactionsIncomeToScreen(transactions_income);
+                })
+                .catch(() => {
+                    message.style.display = "none";
+                    console.log("erro ao salvar transação")
+                })
+            
+        } else {
+            firebase.firestore()
+                .collection("transactions_expense")
+                .add(transaction)
+                .then(() => {
+                    message.style.display = "none";
+    
+                    //addTransactionsIncomeToScreen(transactions_income);
+                })
+                .catch(() => {
+                    message.style.display = "none";
+                    console.log("erro ao salvar transação")
+                })
+        }
+
+        alert("salvouuuuu")
+        console.log(transaction)
+    }
 
     include_btn.addEventListener("click", (e) => {
         e.preventDefault();
-        type
-        validNew()
+        if (validNew() === false) {
+            return
+        } else {
+            transactionInclude()
+            type
+            
+            input_description.value = "";
+            input_description.focus();
+            input_amount.value = "";
+            input_date.value = "";
+            input_type.value = "Digite o tipo da transação"
+        }
 
     })
 
