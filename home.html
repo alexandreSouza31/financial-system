@@ -102,7 +102,7 @@
 
                 <div class="div-date">
                   <label for="date">Data</label>
-                  <input class="date" type="date">
+                  <input type="date" name="date" class="date">
                 </div>
 
                 <div class="div-type">
@@ -124,8 +124,39 @@
           </div>
         </div>
 
+        <dialog class="dialog">
+          <div class="include">
+            <div class="desc">
+              <label for="description">Descrição</label>
+              <input class="description" type="text">
+            </div>
 
+            <div class="div-amount">
+              <label for="amount">Valor</label>
+              <input class="amount" type="number">
+            </div>
 
+            <div class="div-date">
+              <label for="date">Data</label>
+              <input class="date" type="date">
+            </div>
+
+            <div class="div-type">
+              <label for="type">Tipo</label>
+              <select id="type">
+                <option>Digite o tipo da transação</option>
+                <option>Entrada</option>
+                <option>Saída</option>
+              </select>
+            </div>
+
+            <button type="button" id="include-btn" class="btn
+              btn-outline-dark">incluir
+            </button>
+
+          </div>
+        </dialog>
+      
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button class="accordion-button collapsed bg-success text-light"
@@ -150,6 +181,7 @@
                     </tr>
                   </thead>
                   <tbody class="tbody-income">
+                    
                   </tbody>
                 </table>
               </div>

@@ -74,7 +74,7 @@ if (body_login) {
     function setTimeOutSuccess(location) {
         if (location !== "") {
             alert_success.classList.remove("disabled");
-            message.style.display = "block";//fazer no cadastro
+            message.style.display = "block";
             setTimeout(() => {
                 message.style.display = "none";
                 alert_success.classList.add("disabled");
@@ -82,7 +82,7 @@ if (body_login) {
             }, 3000)
         } else {
             alert_success.classList.remove("disabled");
-            message.style.display = "block";//fazer no cadastro
+            message.style.display = "block";
             setTimeout(() => {
                 message.style.display = "none";
                 alert_success.classList.add("disabled");

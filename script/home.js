@@ -6,7 +6,6 @@ let alert_success = document.querySelector(".alert-success");
 if (body_home) {
     //configs sessão
     const out_btn = document.querySelector("#out-btn");
-    const h3 = document.querySelector(".h3-home");
 
     function logout() {
         firebase.auth().signOut().then(() => {
@@ -45,10 +44,24 @@ if (body_home) {
     const tbody_income = document.querySelector(".tbody-income");
     const tbody_expense = document.querySelector(".tbody-expense");
 
-    //resume
-    // const span_income = document.querySelector(".span-credit");
-    // const span_expense = document.querySelector(".span-expense");
-    // const balance = document.querySelector(".balance");
+    function setTimeOutDanger() {
+        message.style.display = "block";
+        alert_danger.classList.remove("disabled");
+        setTimeout(() => {
+            message.style.display = "none";
+            alert_danger.classList.add("disabled");
+        }, 2000)
+    }
+
+    function setTimeOutSuccess() {
+
+        alert_success.classList.remove("disabled");
+        message.style.display = "block";
+        setTimeout(() => {
+            message.style.display = "none";
+            alert_success.classList.add("disabled");
+        }, 2000)
+    }
 
     //agr preciso acessar somente os registros daquele usuário em específico:
     firebase.auth().onAuthStateChanged(user => {
@@ -61,15 +74,21 @@ if (body_home) {
 
     function findTransactions_income(user) {//busca as transações de entrada do usuário
         message.style.display = "block";
+
         firebase.firestore()
             .collection("transactions_income")
             .orderBy("date", "desc")
             .where("user.uid", "==", user.uid)
             .get()
             .then(snapshot => {
-                console.log(user.uid)
+                
                 message.style.display = "none";
-                const transactions_income = snapshot.docs.map(doc => doc.data())//o doc faz parte do que é retornado do firestore
+
+                const transactions_income = snapshot.docs.map(doc => ({
+                    ...doc.data(),//o doc faz parte do que é retornado do firestore
+                    uid: doc.id
+                }))
+
 
                 addTransactionsIncomeToScreen(transactions_income);
             })
@@ -78,9 +97,9 @@ if (body_home) {
             })
     }
 
-
     function findTransactions_expense(user) {//busca as transações de saída do usuário
         message.style.display = "block";
+
         firebase.firestore()
             .collection("transactions_expense")
             .orderBy("date", "desc")//ordem do mais novo pro antigo
@@ -88,8 +107,10 @@ if (body_home) {
             .get()
             .then(snapshot => {
                 message.style.display = "none";
-                const transactions_expense = snapshot.docs.map(doc => doc.data())
-                console.log(transactions_expense)
+                const transactions_expense = snapshot.docs.map(doc => ({
+                    ...doc.data(),
+                    uid: doc.id
+                }))
                 addTransactionsExpenseToScreen(transactions_expense);
             })
     }
@@ -98,52 +119,62 @@ if (body_home) {
         transactions.forEach(transaction => {
 
             const tr_income = document.createElement("tr");
+            let trash = document.createElement("i");
+            trash = trash.innerHTML = "<i class='bi bi-trash3'>";
+
             tr_income.classList.add(transaction.type);
+            tr_income.id = transaction.uid;
             tr_income.innerHTML =
                 `<td>${transaction.description}</td>
                 <td>${transaction.amount.toFixed(2)}</td>
                 <td>${formatDate(transaction.date)}</td>
-                <i class="bi bi-trash3">
+                ${trash}
                 `
             tbody_income.appendChild(tr_income)
 
         });
     }
+    
+    const tr_expense = document.createElement("tr");
     function addTransactionsExpenseToScreen(transactions) {//recebe as transações e adiciona na tela
         transactions.forEach(transaction => {
-            const tr_expense = document.createElement("tr");
+
+            let trash = document.createElement("i");
+            trash = trash.innerHTML = "<i class='bi bi-trash3' onclick='removeTransaction()'>";
+
             tr_expense.classList.add(transaction.type);
+
+            tr_expense.id = transaction.uid;//criando id pra cada transação
             tr_expense.innerHTML =
                 `<td>${transaction.description}</td>
                 <td>${transaction.amount.toFixed(2)}</td>
                 <td>${formatDate(transaction.date)}</td>
-                <i class="bi bi-trash3">
-                `
+                ${trash}
+                  `
             tbody_expense.appendChild(tr_expense)
-
         });
     }
 
 
     function formatDate(date) {
-        return new Date(date).toLocaleDateString("pt-br")
+        return new Date(date).toLocaleDateString('pt-BR', { timeZone: 'UTC' });
     }
 
 
     let type = input_type.addEventListener("change", () => {
         if (input_type.value == "Entrada") {
             console.log("transacao de entrada")
-            
+
         }
         if (input_type.value == "Saída") {
             console.log("transacao de saida")
-           
+
         }
         return input_type.value
     })
 
     function validNew() {
-        if (input_description.value === "" || input_amount.value === "" || input_amount.value<1 || input_date.value === "" || input_type.value == "Digite o tipo da transação") {
+        if (input_description.value === "" || input_amount.value === "" || input_amount.value < 1 || input_date.value === "" || input_type.value == "Digite o tipo da transação") {
             alert_danger.innerHTML = `preencha os dados corretamente!`;
             setTimeOutDanger()
             return false
@@ -166,29 +197,27 @@ if (body_home) {
                 uid: firebase.auth().currentUser.uid,
             }
         }
-        
+
         if (input_type.value == "Entrada") {
             firebase.firestore()
                 .collection("transactions_income")
                 .add(transaction)
                 .then(() => {
                     message.style.display = "none";
-    
-                    //addTransactionsIncomeToScreen(transactions_income);
+
                 })
                 .catch(() => {
                     message.style.display = "none";
                     console.log("erro ao salvar transação")
                 })
-            
+
         } else {
             firebase.firestore()
                 .collection("transactions_expense")
                 .add(transaction)
                 .then(() => {
                     message.style.display = "none";
-    
-                    //addTransactionsIncomeToScreen(transactions_income);
+
                 })
                 .catch(() => {
                     message.style.display = "none";
@@ -196,7 +225,7 @@ if (body_home) {
                 })
         }
 
-        alert("salvouuuuu")
+        alert("transação salva!")
         console.log(transaction)
     }
 
@@ -207,7 +236,7 @@ if (body_home) {
         } else {
             transactionInclude()
             type
-            
+
             input_description.value = "";
             input_description.focus();
             input_amount.value = "";
@@ -217,22 +246,5 @@ if (body_home) {
 
     })
 
-    function setTimeOutDanger() {
-        message.style.display = "block";
-        alert_danger.classList.remove("disabled");
-        setTimeout(() => {
-            message.style.display = "none";
-            alert_danger.classList.add("disabled");
-        }, 2000)
-    }
 
-    function setTimeOutSuccess() {
-        
-            alert_success.classList.remove("disabled");
-            message.style.display = "block";
-            setTimeout(() => {
-                message.style.display = "none";
-                alert_success.classList.add("disabled");
-            }, 2000)
-    }
 }
