@@ -74,7 +74,8 @@ Mobile first, database, clean code, refactoring.
 Firebase and Firestore
 https://console.firebase.google.com/
 
-
+Bootstrap for icons and resources
+https://getbootstrap.com/
 
 ### How to run the code? 
 
