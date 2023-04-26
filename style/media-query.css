@@ -1,0 +1,115 @@
+@charset "UTF-8";
+
+/* other devices */
+@charset "UTF-8";
+
+@media only screen and (min-width: 800px) {
+
+    /* general */
+
+    body {
+        height: 100vh;
+        margin: 0;
+    }
+
+
+    form {
+        background-image: linear-gradient(#62929E, rgb(181, 231, 255));
+        width: 60vw;
+    }
+
+    /*home*/
+
+    .container-nav {
+        width: 60vw;
+    }
+
+    .accordion {
+        width: 60vw;
+    }
+
+    .include {
+        width: 60vw;
+        background-image: linear-gradient(#62929E, rgb(181, 231, 255));
+
+    }
+
+}
+
+
+@media only screen and (min-width: 1200px) {
+
+    /* general */
+    form {
+        background-image: linear-gradient(#62929E, rgb(181, 231, 255));
+        width: 50vw;
+    }
+
+    /*home*/
+
+    .container-nav {
+        width: 50vw;
+    }
+
+    .accordion {
+        width: 50vw;
+    }
+
+    .include {
+        width: 50vw;
+        background-image: linear-gradient(#62929E, rgb(181, 231, 255));
+
+    }
+
+}
+
+@media only screen and (min-width: 1450px) {
+
+    /* general */
+
+    form {
+        background-image: linear-gradient(#62929E, rgb(181, 231, 255));
+        width: 50vw;
+    }
+
+    /*home*/
+
+    .container-nav {
+        width: 50vw;
+    }
+
+    .accordion {
+        width: 50vw;
+    }
+
+    .include {
+        width: 50vw;
+    }
+
+}
+
+
+@media only screen and (min-width: 1700px) {
+
+    /* general */
+
+    form {
+        background-image: linear-gradient(#62929E, rgb(181, 231, 255));
+        width: 40vw;
+    }
+
+    /*home*/
+
+    .container-nav {
+        width: 40vw;
+    }
+
+    .accordion {
+        width: 40vw;
+    }
+
+    .include {
+        width: 40vw;
+    }
+
+}

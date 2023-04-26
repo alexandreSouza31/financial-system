@@ -1,10 +1,11 @@
 /* general */
-*{
+* {
     font-size: 1.15rem;
     box-sizing: border-box;
-    font-family: "poppins",sans-serif;
+    font-family: "poppins", sans-serif;
     outline: none;
 }
+
 body {
     display: flex;
     flex-direction: column;
@@ -14,9 +15,13 @@ body {
     margin: 0;
 }
 
-h1 {height: 100px;}
+h1 {
+    height: 100px;
+}
 
-h3 {margin: 10px;}
+h3 {
+    margin: 10px;
+}
 
 .message {
     display: none;
@@ -45,16 +50,13 @@ h3 {margin: 10px;}
     width: 80%;
 }
 
-
-
 form {
     display: flex;
     flex-direction: column;
-    background-color: #62929E;
+    background-image: linear-gradient( #62929E, rgb(181, 231, 255));
     width: 100vw;
     max-height: 75vh;
     padding: 50px;
-    /* border-radius: 10px; */
 }
 
 .bi-check {
@@ -65,7 +67,7 @@ form {
 }
 
 input {
-    
+
     padding: 10px;
     margin-bottom: 10px;
     border: none;
@@ -96,7 +98,9 @@ button {
     padding: 0;
 }
 
-#enter-btn,#register-btn,#out-btn {
+#enter-btn,
+#register-btn,
+#out-btn {
     margin: 20px 0;
 
 }
@@ -121,18 +125,19 @@ footer {
 /*home*/
 
 .body-home {
+    background-image: linear-gradient( #62929E, rgb(181, 231, 255));
     display: flex;
     flex-direction: column;
     height: 100vh;
-    
+
 }
 
-.body-home h1{
+.body-home h1 {
     margin-top: 100px;
-  
+
 }
 
-.container-nav{
+.container-nav {
     width: 100vw;
     padding: 10px;
     display: flex;
@@ -148,111 +153,129 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
-  
+
 }
 
-.accordion{
+.accordion {
     margin: 0 auto;
     width: 100vw;
 }
 
-.item-resume{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    box-shadow: 0px 0px 5px #ccc;
-    border-radius: 10px;
-    margin: 10px auto;
-    
+#include-accordion{
+    background-color: #62929E;
+}
+#accordion-item{
+    background-color:black;
+}
+#accordion-item-success{
+    background-color:#04c004;
 }
 
-.item-resume p{
-    font-size: 1.1rem;
-    position: relative;
-    top: 10px;
-
+#accordion-body{
+    background-color: whitesmoke;
+}
+#accordion-item-danger{
+    background-color:red;
 }
 
-#btn-resume{
-    background-color:  #62929E;
-    color: white;
+#expense-accordion{
+    background-color:#62929E ;
+}
+#income-accordion{
+    background-color:#62929E ;
 }
 
-.include{
+.include {
     width: 90vw;
     margin: 20px auto;
-    background-color: #62929E;
+    background-image: linear-gradient( #62929E, rgb(181, 231, 255));
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
 }
 
-#container-include{
+
+#container-include {
     display: flex;
     justify-content: center;
 }
 
-.desc,.div-amount,.div-date,.div-type{
+.desc,
+.div-amount,
+.div-date,
+.div-type {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100vw;
 }
 
-input[date]{
+input[date] {
     border: none;
 }
-.desc,.div-amount label{
+
+.desc,
+.div-amount label {
     position: relative;
     top: 20px;
 }
 
 
-.table-amount{
+.table-amount {
     width: 100;
     display: flex;
     justify-content: center;
 }
 
-table{
+table {
     width: 98%;
-    
+
 }
 
-th{
+th {
     text-align: center;
 
 }
 
-.body-home i{
+
+.body-home i {
     font-size: 25px;
     text-align: center;
     margin: 0 auto;
 }
 
-.column-amount{
+.column-amount {
     width: 30%;
 }
 
 
-td{
+td {
     list-style: none;
     border: 1px solid gray;
     border-radius: 10px;
     padding: 10px;
     margin: 5px auto;
     font-size: .9rem;
-    flex-wrap: wrap;
+    word-break: break-all;
+
 }
 
-.bi-trash3{
+tr:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.bi-trash3 {
+  
     position: relative;
-    top: 5px;
+    top: 10px;
     left: 5px;
+    float: right;
 }
 
 
-.disabled {display: none;}
 
+.disabled {
+    display: none;
+}

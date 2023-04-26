@@ -50,38 +50,13 @@
     <div class="container-home">
 
       <div class="accordion" id="accordionPanelsStayOpenExample">
-        <!-- <div class="accordion-item">
-          <h2 class="accordion-header" id="resume-header">
-            <button id="btn-resume" class="accordion-button" type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
-              aria-controls="panelsStayOpen-collapseOne">
-              Resumo
-            </button>
-          </h2>
-          <div id="panelsStayOpen-collapseOne" class="accordion-collapse
-            collapse show">
-            <div class="accordion-body accordion-resume">
 
-              <div class="item-resume">
-                <p>Entradas: R$ </p><span class="span-income">3200</span>
-              </div>
-              <div class="item-resume">
-                <p>Saídas: R$ </p><span class="span-expense">2300</span>
-              </div>
-              <div class="item-resume">
-                <p>Saldo: R$ </p><span class="balance">900</span>
-              </div>
-
-            </div>
-          </div>
-        </div> -->
-        <div class="accordion-item">
+        <div class="accordion-item" id="accordion-item">
           <h2 class="accordion-header">
-            <button class="accordion-button collapsed bg-light text-dark"
+            <button class="accordion-button collapsed text-light"
               type="button" data-bs-toggle="collapse"
               data-bs-target="#panelsStayOpen-collapse" aria-expanded="false"
-              aria-controls="panelsStayOpen-collapse">
+              aria-controls="panelsStayOpen-collapse" id="include-accordion">
               Incluir novo
             </button>
           </h2>
@@ -123,52 +98,19 @@
             </div>
           </div>
         </div>
-
-        <dialog class="dialog">
-          <div class="include">
-            <div class="desc">
-              <label for="description">Descrição</label>
-              <input class="description" type="text">
-            </div>
-
-            <div class="div-amount">
-              <label for="amount">Valor</label>
-              <input class="amount" type="number">
-            </div>
-
-            <div class="div-date">
-              <label for="date">Data</label>
-              <input class="date" type="date">
-            </div>
-
-            <div class="div-type">
-              <label for="type">Tipo</label>
-              <select id="type">
-                <option>Digite o tipo da transação</option>
-                <option>Entrada</option>
-                <option>Saída</option>
-              </select>
-            </div>
-
-            <button type="button" id="include-btn" class="btn
-              btn-outline-dark">incluir
-            </button>
-
-          </div>
-        </dialog>
       
-        <div class="accordion-item">
+        <div class="accordion-item" id="accordion-item-success">
           <h2 class="accordion-header">
-            <button class="accordion-button collapsed bg-success text-light"
+            <button class="accordion-button collapsed text-light"
               type="button" data-bs-toggle="collapse"
               data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
-              aria-controls="panelsStayOpen-collapseTwo">
+              aria-controls="panelsStayOpen-collapseTwo" id="expense-accordion">
               Entradas
             </button>
           </h2>
           <div id="panelsStayOpen-collapseTwo" class="accordion-collapse
             collapse">
-            <div class="accordion-body">
+            <div class="accordion-body" id="accordion-body">
 
               <div class="table-income">
                 <table>
@@ -190,19 +132,19 @@
         </div>
 
 
-        <div class="accordion-item">
+        <div class="accordion-item" id="accordion-item-danger">
           <h2 class="accordion-header">
-            <button class="accordion-button collapsed bg-danger text-light"
+            <button class="accordion-button collapsed text-light"
               type="button" data-bs-toggle="collapse"
               data-bs-target="#panelsStayOpen-collapseTree"
               aria-expanded="false"
-              aria-controls="panelsStayOpen-collapseTree">
+              aria-controls="panelsStayOpen-collapseTree" id="income-accordion">
               Saídas
             </button>
           </h2>
           <div id="panelsStayOpen-collapseTree" class="accordion-collapse
             collapse">
-            <div class="accordion-body">
+            <div class="accordion-body" id="accordion-body">
 
               <div class="table-expense">
                 <table>
