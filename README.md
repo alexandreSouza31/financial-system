@@ -42,10 +42,10 @@ For now, you can only view and create a new task from the main page.
 ### What I learned
 
 ```js
-const standard_email = /^[\w._-]+@[\w_.-]+\.[\w]+[\w]+[\w]/;//regular expression
+const standard_email = /^[\w._-]+@[\w_.-]+\.[\w]+[\w]+[\w]/;//email regular expression
 
-          
-then(response => {//treatment of promi
+          treatment of promises
+then(response => {
     alert_success.innerHTML = `Entrando..
     setTimeOutSuccess("/home.html");
 }).catch(error => {
@@ -74,7 +74,8 @@ Mobile first, database, clean code, refactoring.
 Firebase and Firestore
 https://console.firebase.google.com/
 
-
+Bootstrap for icons and resources
+https://getbootstrap.com/
 
 ### How to run the code? 
 
