@@ -152,7 +152,12 @@ if (body_login) {
 
     function sendEmailRecovery() {
         alert_success.innerHTML = `caso haja esse email em nosso banco de dados você receberá um link em breve!(verifique a caixa de spam também)`;
-        setTimeOutSuccess();
+        
+        message.style.display = "block";
+        setTimeout(() => {
+            setTimeOutSuccess("/index.html");
+        }, 5000)
+        
     }
 
     function recoveryPassowrd() {
@@ -180,11 +185,11 @@ if (body_login) {
     });
 
     
-    firebase.auth().onAuthStateChanged(user => {//matém usuário logado, caso tenha feito login
-        if (user) {
-            window.location.href = "/home.html";
-        }
-    })
+    // firebase.auth().onAuthStateChanged(user => {//matém usuário logado, caso tenha feito login
+    //     if (user) {
+    //         window.location.href = "/home.html";
+    //     }
+    // })
 
 
 }
