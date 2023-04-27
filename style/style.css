@@ -25,6 +25,10 @@ h3 {
 
 .message {
     display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
     background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
     width: 100%;
@@ -55,7 +59,7 @@ form {
     flex-direction: column;
     background-image: linear-gradient( #62929E, rgb(181, 231, 255));
     width: 100vw;
-    max-height: 75vh;
+    
     padding: 50px;
 }
 
@@ -112,6 +116,7 @@ button {
 a {
     margin-top: 10px;
     color: white;
+    width: 100px;
 }
 
 footer {
