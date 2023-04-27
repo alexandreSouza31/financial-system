@@ -7,6 +7,7 @@ if (body_register) {
     let body_register = document.querySelector(".body-register");
 
     let message = document.querySelector(".message");
+    message.innerHTML="carregando..."
     let alert_danger = document.querySelector(".alert-danger");
     let alert_success = document.querySelector(".alert-success");
 
@@ -143,7 +144,7 @@ if (body_register) {
     alert_success.classList.add("disabled");
 
     function setTimeOutDanger() {
-        message.style.display = "block";
+        message.style.display = "flex";
         alert_danger.classList.remove("disabled");
         setTimeout(() => {
             message.style.display = "none";
@@ -154,7 +155,7 @@ if (body_register) {
     function setTimeOutSuccess(location) {//quero que mostre que o email foi enviado mesmo que não exista. Questões de segurança.
         if (location !== "") {
             alert_success.classList.remove("disabled");
-            message.style.display = "block";
+            message.style.display = "flex";
             console.log("primeiro")
             setTimeout(() => {
                 message.style.display = "none";
@@ -176,7 +177,7 @@ if (body_register) {
 
     register_btn.addEventListener("click", (e) => {
         e.preventDefault();
-        message.style.display = "block";
+        message.style.display = "flex";
         if (validateRegister() === false) {
 
             alert_danger.innerHTML = `preencha os dados corretamente!`;
@@ -206,11 +207,11 @@ if (body_register) {
     })
 
     
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            window.location.href = "/home.html";
-        }
-    })
+    // firebase.auth().onAuthStateChanged(user => {
+    //     if (user) {
+    //         window.location.href = "/home.html";
+    //     }
+    // })
 
 
 

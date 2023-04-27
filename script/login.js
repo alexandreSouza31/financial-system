@@ -4,6 +4,7 @@ let body_login = document.querySelector(".body-login");
 if (body_login) {
 
     let message = document.querySelector(".message");
+    message.innerHTML="carregando..."
     let alert_danger = document.querySelector(".alert-danger");
     let alert_success = document.querySelector(".alert-success");
 
@@ -63,7 +64,7 @@ if (body_login) {
     }
 
     function setTimeOutDanger() {
-        message.style.display = "block";//fazer no cadastro
+        message.style.display = "flex";//fazer no cadastro
         alert_danger.classList.remove("disabled");
         setTimeout(() => {
             message.style.display = "none";
@@ -74,7 +75,7 @@ if (body_login) {
     function setTimeOutSuccess(location) {
         if (location !== "") {
             alert_success.classList.remove("disabled");
-            message.style.display = "block";
+            message.style.display = "flex";
             setTimeout(() => {
                 message.style.display = "none";
                 alert_success.classList.add("disabled");
@@ -82,7 +83,7 @@ if (body_login) {
             }, 3000)
         } else {
             alert_success.classList.remove("disabled");
-            message.style.display = "block";
+            message.style.display = "flex";
             setTimeout(() => {
                 message.style.display = "none";
                 alert_success.classList.add("disabled");
@@ -97,7 +98,7 @@ if (body_login) {
 
 
     enter_btn.addEventListener("click", (e) => {
-        message.style.display = "block";
+        message.style.display = "flex";
         e.preventDefault();
         if (validateLogin() === false) {
             alert_danger.innerHTML = `preencha os dados corretamente!`;
@@ -153,7 +154,7 @@ if (body_login) {
     function sendEmailRecovery() {
         alert_success.innerHTML = `caso haja esse email em nosso banco de dados você receberá um link em breve!(verifique a caixa de spam também)`;
         
-        message.style.display = "block";
+        message.style.display = "flex";
         setTimeout(() => {
             setTimeOutSuccess("/index.html");
         }, 5000)
@@ -175,6 +176,8 @@ if (body_login) {
         firebase.auth().sendPasswordResetEmail(email_login.value).then(() => {
             if (error.code == "auth/wrong-password") {
                 return "Senha inválida!"
+            } else {
+                //console.log("Senha correta")
             }
         })
     }

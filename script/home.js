@@ -5,6 +5,7 @@ let alert_success = document.querySelector(".alert-success");
 
 if (body_home) {
     //configs sessão
+    message.innerHTML="carregando..."
     const out_btn = document.querySelector("#out-btn");
 
     function logout() {
@@ -23,14 +24,14 @@ if (body_home) {
 
     if (body_home && window.location.href == "/index.html") {
         message.style.backgroundColor = "red"
-        message.style.display = "block";
+        message.style.display = "flex";
     }
 
-    firebase.auth().onAuthStateChanged(user => {//se não tiver logado vai pra tela de login
-        if (user) {
-            //window.location.href = "/index.html";
-        }
-    })
+    // firebase.auth().onAuthStateChanged(user => {//se não tiver logado vai pra tela de login
+    //     if (user) {
+    //         //window.location.href = "/index.html";
+    //     }
+    // })
     //fim das configs da sessão
 
     //transação
@@ -45,7 +46,7 @@ if (body_home) {
     const tbody_expense = document.querySelector(".tbody-expense");
 
     function setTimeOutDanger() {
-        message.style.display = "block";
+        message.style.display = "flex";
         alert_danger.classList.remove("disabled");
         setTimeout(() => {
             message.style.display = "none";
@@ -56,7 +57,7 @@ if (body_home) {
     function setTimeOutSuccess() {
 
         alert_success.classList.remove("disabled");
-        message.style.display = "block";
+        message.style.display = "flex";
         setTimeout(() => {
             message.style.display = "none";
             alert_success.classList.add("disabled");
@@ -73,7 +74,7 @@ if (body_home) {
 
 
     function findTransactions_income(user) {//busca as transações de entrada do usuário
-        message.style.display = "block";
+        message.style.display = "flex";
 
         firebase.firestore()
             .collection("transactions_income")
@@ -98,7 +99,7 @@ if (body_home) {
     }
 
     function findTransactions_expense(user) {//busca as transações de saída do usuário
-        message.style.display = "block";
+        message.style.display = "flex";
 
         firebase.firestore()
             .collection("transactions_expense")
@@ -187,7 +188,7 @@ if (body_home) {
     }
 
     function transactionInclude() {
-        message.style.display = "block";
+        message.style.display = "flex";
         const transaction = {
             type: input_type.value,
             date: input_date.value,
