@@ -78,9 +78,18 @@ Bootstrap for icons and resources
 https://getbootstrap.com/
 
 ### How to run the code? 
+ Cloning/downloading the project
 
+Enter the command```git clone https://github.com/alexandreSouza31/financial-system``` in the terminal, or if you prefer, download it by clicking on the green button called "Code" in this project's repository, and then, "Download zip.
 
-Just download and run index.html :)
+run index.html
+
+#### Deploy
+
+If you want to see the application running without having to download it, go to
+- [Vercel](https://financial-system-mu.vercel.app/) - Website used to host the application.
+
+:)
 
 If you want to test the app without downloading the code:https://financial-system-mu.vercel.app/
 
